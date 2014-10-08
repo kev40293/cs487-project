@@ -10,13 +10,14 @@ urls = (
         )
 render = web.template.render("templates")
 app = web.application(urls, globals())
-session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={'loggedin' : False})
+web.config._session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={'loggedin' : False})
 
 class index():
     def GET(self):
         # Check if logged in
+        session = web.config._session
         if session.loggedin:
-            return "You are logged in"
+            return "You are logged in as " + session.role
         # If not logged in
         else:
             return render.login()
