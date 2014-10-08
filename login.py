@@ -1,9 +1,12 @@
 import web
+from web import form
 
+render = web.template.render("templates")
 
 class login:
-    render = web.template.render('templates/')
     def GET(self):
-        return self.render.login()
+        return render.login()
+
     def POST(self):
-        return self.render.login()
+        upass = web.input(username=None)
+        return str(upass.username) + " tried to log in"

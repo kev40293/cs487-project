@@ -1,8 +1,11 @@
-#!/usr/bin/python3
+#!/usr/bin/python2
 import web
 
+from login import login
+
 urls = (
-        '/', 'index'
+        '/', 'index',
+        '/login', 'login'
         )
 
 class index():
