@@ -30,3 +30,8 @@ class login:
     def get_user(self,user):
         user = User("manager", "$2a$12$CyLyLDPA5NFTY48o3fANQOEsni38JgHBk3FNwdUFd1OwYMBZxN146", "manager")
         return user
+
+class logout:
+    def POST(self):
+        web.config._session.loggedin = False
+        raise web.seeother('/')
