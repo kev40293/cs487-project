@@ -1,5 +1,6 @@
 import web
 import bcrypt
+from db import db
 
 class User():
     def __init__(self,n,p,t):
@@ -27,9 +28,12 @@ class login:
         else:
             return None
 
-    def get_user(self,user):
-        user = User("manager", "$2a$12$CyLyLDPA5NFTY48o3fANQOEsni38JgHBk3FNwdUFd1OwYMBZxN146", "manager")
-        return user
+    def get_user(self,username):
+        #user = User("manager", "$2a$12$CyLyLDPA5NFTY48o3fANQOEsni38JgHBk3FNwdUFd1OwYMBZxN146", "manager")
+        user = db.select('Users join Role', dict(username=username),
+                where="uname = $username and Users.role = Role.id",
+                what='uname,password,Role.name')[0]
+        return User(user.uname, user.password, user.name)
 
 class logout:
     def POST(self):
