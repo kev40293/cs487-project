@@ -1,12 +1,11 @@
-<html>
-<head>
-</head>
-
-<body>
+$def with (loggedin)
+$if loggedin:
+   <form name="logout" method="post" action="/logout">
+      <input type='submit' name="logout" value="Logout" />
+   </form>
+$else:
    <form method="post" id="login" action="/login">
       <input type=text id='username' name='username'>/
       <input type=password id='password' name='password'/>
       <input type=submit name='submitted' value='login'/>
    </form>
-</body>
-</html>

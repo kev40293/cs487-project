@@ -19,12 +19,9 @@ class index():
     def GET(self):
         # Check if logged in
         session = web.config._session
-        if session.loggedin:
-            logout_form = render.logout()
-            return render.base(session.role, logout_form)
-        # If not logged in
-        else:
-            return render.login()
+        banner = render.banner(session.loggedin)
+        page = None
+        return render.base(session.role, banner, page)
 
 if __name__ == "__main__":
     app.run()
