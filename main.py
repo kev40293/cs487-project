@@ -15,13 +15,15 @@ render = web.template.render("templates")
 app = web.application(urls, globals())
 web.config._session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={'loggedin' : False})
 
+def render_page(content):
+    session = web.config._session
+    banner = render.banner(session.loggedin)
+    page = None
+    return render.base(session.role, banner, page)
+
 class index():
     def GET(self):
-        # Check if logged in
-        session = web.config._session
-        banner = render.banner(session.loggedin)
-        page = None
-        return render.base(session.role, banner, page)
+        return render_page(None)
 
 if __name__ == "__main__":
     app.run()
