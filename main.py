@@ -13,7 +13,7 @@ urls = (
         )
 render = web.template.render("templates")
 app = web.application(urls, globals())
-web.config._session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={'loggedin' : False})
+web.config._session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={'loggedin' : False, 'role': None})
 
 def render_page(content):
     session = web.config._session
