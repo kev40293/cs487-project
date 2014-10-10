@@ -38,4 +38,5 @@ class login:
 class logout:
     def POST(self):
         web.config._session.loggedin = False
+        web.config._session.role = "Login"
         raise web.seeother('/')
